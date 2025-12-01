@@ -1222,3 +1222,247 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+/* ============================================================
+   HEADER & NAVBAR IMPROVEMENTS FOR MOBILE
+   ============================================================ */
+
+/* Navigation untuk mobile */
+.nav {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  .nav {
+    display: none;
+    position: fixed;
+    top: 70px; 
+    left: 0;
+    right: 0;
+    background: rgba(40, 43, 56, 0.98);
+    padding: 20px 0;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .nav.active {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+  
+  .nav li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .nav li:last-child {
+    border-bottom: none;
+  }
+  
+  .nav a {
+    display: block;
+    padding: 16px 24px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    min-height: 52px;
+    border-radius: 0;
+    transition: all 0.2s;
+  }
+  
+  .nav a:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: none;
+    color: #fff;
+  }
+  
+  /* Hamburger button styling */
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    border-radius: 10px;
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+  }
+  
+  .hamburger:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+  }
+  
+  .hamburger.active {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  
+  /* Header layout untuk mobile */
+  .header-inner {
+    padding: 10px 16px;
+    position: relative;
+  }
+  
+  .brand {
+    flex: 1;
+  }
+  
+  .controls {
+    order: 0;
+    margin-top: 0;
+    gap: 10px;
+  }
+  
+ 
+  .controls .search {
+    width: 180px;
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+  
+  /* Clear search button position */
+  .clear-search {
+    right: 44px;
+  }
+}
+
+/* Mobile kecil (480px ke bawah) */
+@media (max-width: 480px) {
+  .header-inner {
+    padding: 8px 12px;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .brand h1 {
+    font-size: 15px;
+  }
+  
+  .sub {
+    font-size: 10px;
+  }
+  
+  .controls .search {
+    width: 140px;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  
+  .hamburger {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .clear-search {
+    right: 40px;
+    font-size: 16px;
+  }
+  
+  /* Menu yang lebih tinggi untuk touch */
+  .nav a {
+    padding: 18px 24px;
+    min-height: 56px;
+    font-size: 15px;
+  }
+}
+
+/* Mobile sangat kecil (360px ke bawah) */
+@media (max-width: 360px) {
+  .brand h1 {
+    font-size: 14px;
+  }
+  
+  .sub {
+    font-size: 9px;
+  }
+  
+  .controls .search {
+    width: 120px;
+    padding: 7px 10px;
+  }
+  
+  .hamburger {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  
+  .clear-search {
+    right: 36px;
+  }
+}
+
+/* Landscape mode untuk mobile */
+@media (max-width: 900px) and (orientation: landscape) {
+  .nav {
+    top: 60px;
+    max-height: calc(100vh - 60px);
+  }
+  
+  .nav ul {
+    gap: 5px;
+  }
+  
+  .nav a {
+    padding: 12px 24px;
+    min-height: 44px;
+  }
+}
+
+/* ============================================================
+   PERBAIKAN UNTUK TOUCH DEVICES
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+  .nav a {
+    padding: 16px 24px;
+  }
+  
+  /* Active state untuk touch */
+  .nav a:active {
+    background: rgba(255, 46, 109, 0.15);
+    color: var(--accent);
+  }
+  
+  .hamburger:active {
+    transform: scale(0.95);
+  }
+}
+
+/* ============================================================
+   SCROLL LOCK BODY KETIKA MENU TERBUKA
+   ============================================================ */
+body.menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}

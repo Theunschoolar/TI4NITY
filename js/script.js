@@ -2,6 +2,7 @@
 
 // Menunggu seluruh konten halaman dimuat
 document.addEventListener("DOMContentLoaded", () => {
+  // Data anggota
   const membersData = [
     {
       name: "ELL",
@@ -196,22 +197,56 @@ document.addEventListener("DOMContentLoaded", () => {
       image: "assets/Hema Septia Bemanda.jpeg",
     },
   ];
+
+  // Element references
   const membersGrid = document.getElementById("membersGrid");
   const searchInput = document.getElementById("search");
   const memberCount = document.getElementById("memberCount");
   const heroSection = document.getElementById("home");
+  const btnMobile = document.getElementById("btn-mobile");
+  const nav = document.querySelector(".nav");
+  const videoModal = document.getElementById("videoModal");
+  const modalClose = document.getElementById("modalClose");
+  const videoFrame = document.getElementById("videoFrame");
+  const yearElement = document.getElementById("year");
 
-  function toggleHeroSection(show) {
-    if (show) {
-      heroSection.style.display = "block";
-    } else {
-      heroSection.style.display = "none";
+  // Initialize
+  init();
+
+  function init() {
+    // Render anggota
+    renderMembers(membersData);
+
+    // Set tahun di footer
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
     }
+
+    // Setup event listeners
+    setupEventListeners();
+
+    // Setup animations
+    setupAnimations();
+
+    // Setup mobile menu
+    setupMobileMenu();
+
+    // Setup search functionality
+    setupSearch();
+
+    // Setup touch improvements
+    setupTouchImprovements();
   }
 
+  // 1️⃣ --- FUNGSI RENDER ANGGOTA ---
   function renderMembers(members) {
+    if (!membersGrid) return;
+
     membersGrid.innerHTML = "";
-    memberCount.textContent = members.length;
+
+    if (memberCount) {
+      memberCount.textContent = members.length;
+    }
 
     // Reset class untuk membersGrid
     membersGrid.classList.remove(
@@ -221,9 +256,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (members.length === 0) {
+      const searchTerm = searchInput ? searchInput.value : "";
       membersGrid.innerHTML = `
         <div class="no-results">
-          <p>Tidak ada anggota yang ditemukan untuk pencarian "${searchInput.value}"</p>
+          <p>Tidak ada anggota yang ditemukan untuk pencarian "${searchTerm}"</p>
         </div>
       `;
       return;
@@ -252,7 +288,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // 2️⃣ --- FUNGSI FILTER ANGGOTA ---
   function filterMembers() {
+    if (!searchInput) return;
+
     const searchTerm = searchInput.value.toLowerCase().trim();
 
     if (searchTerm === "") {
@@ -269,194 +308,308 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  searchInput.addEventListener("input", filterMembers);
+  function toggleHeroSection(show) {
+    if (!heroSection) return;
 
-  searchInput.addEventListener("focus", function () {
-    const searchTerm = this.value.toLowerCase().trim();
-    if (searchTerm !== "") {
-      toggleHeroSection(false);
+    if (show) {
+      heroSection.style.display = "block";
+    } else {
+      heroSection.style.display = "none";
     }
-  });
+  }
 
-  searchInput.addEventListener("blur", function () {
-    const searchTerm = this.value.toLowerCase().trim();
-    if (searchTerm === "") {
-      toggleHeroSection(true);
-    }
-  });
+  // 3️⃣ --- SETUP EVENT LISTENERS ---
+  function setupEventListeners() {
+    // Search input events
+    if (searchInput) {
+      searchInput.addEventListener("input", filterMembers);
 
-  renderMembers(membersData);
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // 1️⃣ --- ANIMASI FADE-UP ON SCROLL ---
-  const fadeEls = document.querySelectorAll(
-    ".member-card, .info-card, .hero-content, .hero-media, .section-head"
-  );
-
-  // Tambahkan style awal (pudar dan turun)
-  fadeEls.forEach((el) => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(40px)";
-    el.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
-  });
-
-  // Gunakan Intersection Observer agar animasi hanya muncul saat terlihat di layar
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = "1";
-          entry.target.style.transform = "translateY(0)";
-          observer.unobserve(entry.target); // hentikan pengamatan setelah animasi muncul
+      searchInput.addEventListener("focus", function () {
+        const searchTerm = this.value.toLowerCase().trim();
+        if (searchTerm !== "") {
+          toggleHeroSection(false);
         }
       });
-    },
-    { threshold: 0.15 }
-  );
 
-  fadeEls.forEach((el) => observer.observe(el));
+      searchInput.addEventListener("blur", function () {
+        const searchTerm = this.value.toLowerCase().trim();
+        if (searchTerm === "") {
+          toggleHeroSection(true);
+        }
+      });
 
-  // 2️⃣ --- TAHUN OTOMATIS DI FOOTER ---
-  document.getElementById("year").textContent = new Date().getFullYear();
+      // Prevent zoom on iOS
+      searchInput.addEventListener("touchstart", function (e) {
+        if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+          this.style.fontSize = "16px";
+        }
+      });
+    }
 
-  // 3️⃣ --- HAMBURGER MENU UNTUK MOBILE ---
-  const btnMobile = document.getElementById("btn-mobile");
-  const nav = document.querySelector(".nav");
+    // Smooth scroll untuk navigation links
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href");
+        const target = document.querySelector(targetId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: "smooth",
+          });
 
-  btnMobile.addEventListener("click", () => {
-    nav.classList.toggle("active");
-    btnMobile.textContent = nav.classList.contains("active") ? "✕" : "☰";
-  });
-
-  // 4️⃣ --- MODAL VIDEO ---
-  const videoModal = document.getElementById("videoModal");
-  const openVideo = document.getElementById("openVideo");
-  const modalClose = document.getElementById("modalClose");
-  const videoFrame = document.getElementById("videoFrame");
-
-  if (openVideo && videoModal && modalClose && videoFrame) {
-    openVideo.addEventListener("click", () => {
-      videoModal.style.display = "flex";
-      videoFrame.src = "https://www.youtube.com/embed/VIDEO_ID?autoplay=1"; // ganti VIDEO_ID sesuai video kamu
+          // Close mobile menu jika terbuka
+          if (nav && nav.classList.contains("active")) {
+            toggleMobileMenu();
+          }
+        }
+      });
     });
 
-    modalClose.addEventListener("click", () => {
-      videoModal.style.display = "none";
-      videoFrame.src = "";
-    });
+    // Modal video (jika ada)
+    const openVideo = document.getElementById("openVideo");
+    if (openVideo && videoModal && modalClose && videoFrame) {
+      openVideo.addEventListener("click", () => {
+        videoModal.style.display = "flex";
+        videoFrame.src = "https://www.youtube.com/embed/VIDEO_ID?autoplay=1";
+      });
 
-    videoModal.addEventListener("click", (e) => {
-      if (e.target === videoModal) {
+      modalClose.addEventListener("click", () => {
         videoModal.style.display = "none";
         videoFrame.src = "";
-      }
-    });
+      });
+
+      videoModal.addEventListener("click", (e) => {
+        if (e.target === videoModal) {
+          videoModal.style.display = "none";
+          videoFrame.src = "";
+        }
+      });
+    }
   }
 
-  // 5️⃣ --- ANIMASI SCROLL LEMBUT UNTUK LINK NAVIGASI ---
-  const navLinks = document.querySelectorAll('a[href^="#"]');
-  navLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute("href");
-      const target = document.querySelector(targetId);
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 80,
-          behavior: "smooth",
+  // 4️⃣ --- SETUP ANIMATIONS ---
+  function setupAnimations() {
+    const fadeEls = document.querySelectorAll(
+      ".member-card, .info-card, .hero-content, .hero-media, .section-head"
+    );
+
+    // Tambahkan style awal (pudar dan turun)
+    fadeEls.forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(40px)";
+      el.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
+    });
+
+    // Gunakan Intersection Observer agar animasi hanya muncul saat terlihat di layar
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    fadeEls.forEach((el) => observer.observe(el));
+  }
+
+  // 5️⃣ --- SETUP MOBILE MENU ---
+  function setupMobileMenu() {
+    if (!btnMobile || !nav) return;
+
+    // Function untuk toggle menu
+    function toggleMobileMenu() {
+      const isOpen = nav.classList.contains("active");
+
+      // Toggle menu
+      nav.classList.toggle("active");
+      btnMobile.classList.toggle("active");
+
+      // Update hamburger icon
+      btnMobile.textContent = isOpen ? "☰" : "✕";
+      btnMobile.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
+
+      // Toggle body scroll lock
+      document.body.classList.toggle("menu-open", !isOpen);
+
+      // Tutup keyboard jika terbuka (untuk mobile)
+      if (!isOpen && searchInput && document.activeElement === searchInput) {
+        searchInput.blur();
+      }
+    }
+
+    // Event listener untuk hamburger button
+    btnMobile.addEventListener("click", toggleMobileMenu);
+
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll(".nav a");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (nav.classList.contains("active")) {
+          toggleMobileMenu();
+        }
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        nav.classList.contains("active") &&
+        !nav.contains(e.target) &&
+        !btnMobile.contains(e.target)
+      ) {
+        toggleMobileMenu();
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && nav.classList.contains("active")) {
+        toggleMobileMenu();
+      }
+    });
+
+    // Close menu on scroll (mobile)
+    let scrollTimeout;
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (nav.classList.contains("active")) {
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            if (nav.classList.contains("active")) {
+              toggleMobileMenu();
+            }
+          }, 100);
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  // 6️⃣ --- SETUP SEARCH FUNCTIONALITY ---
+  function setupSearch() {
+    if (!searchInput) return;
+
+    // Create clear button
+    const clearSearchBtn = document.createElement("button");
+    clearSearchBtn.innerHTML = "✕";
+    clearSearchBtn.className = "clear-search";
+    clearSearchBtn.setAttribute("aria-label", "Clear search");
+    clearSearchBtn.setAttribute("type", "button");
+
+    // Insert clear button
+    const searchContainer = searchInput.parentNode;
+    if (searchContainer) {
+      searchContainer.appendChild(clearSearchBtn);
+    }
+
+    // Toggle visibility
+    function updateClearButton() {
+      clearSearchBtn.style.display =
+        searchInput.value.length > 0 ? "block" : "none";
+    }
+
+    // Event listeners for clear button
+    clearSearchBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      filterMembers();
+      searchInput.focus();
+      updateClearButton();
+    });
+
+    searchInput.addEventListener("input", () => {
+      updateClearButton();
+      // Filter dilakukan di event listener utama
+    });
+
+    // Initialize
+    updateClearButton();
+  }
+
+  // 7️⃣ --- SETUP TOUCH IMPROVEMENTS ---
+  function setupTouchImprovements() {
+    // Add active state for touch devices
+    if ("ontouchstart" in window || navigator.maxTouchPoints) {
+      // Add touch feedback to member cards
+      setTimeout(() => {
+        const memberCards = document.querySelectorAll(".member-card");
+        memberCards.forEach((card) => {
+          card.style.cursor = "pointer";
+
+          card.addEventListener(
+            "touchstart",
+            function () {
+              this.style.transform = "scale(0.98)";
+              this.style.transition = "transform 0.1s ease";
+            },
+            { passive: true }
+          );
+
+          card.addEventListener(
+            "touchend",
+            function () {
+              this.style.transform = "";
+            },
+            { passive: true }
+          );
+
+          card.addEventListener(
+            "touchcancel",
+            function () {
+              this.style.transform = "";
+            },
+            { passive: true }
+          );
+        });
+      }, 500);
+
+      // Lazy load images for better performance
+      if ("IntersectionObserver" in window) {
+        const imageObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                const src = img.getAttribute("data-src");
+                if (src) {
+                  img.src = src;
+                  img.removeAttribute("data-src");
+                }
+                imageObserver.unobserve(img);
+              }
+            });
+          },
+          { rootMargin: "50px 0px" }
+        );
+
+        document.querySelectorAll("img[data-src]").forEach((img) => {
+          imageObserver.observe(img);
         });
       }
-    });
-  });
-});
-
-// 6️⃣ --- IMPROVED MOBILE MENU ---
-const btnMobile = document.getElementById("btn-mobile");
-const nav = document.querySelector(".nav");
-
-btnMobile.addEventListener("click", () => {
-  nav.classList.toggle("active");
-  btnMobile.textContent = nav.classList.contains("active") ? "✕" : "☰";
-  // Prevent body scroll when menu is open
-  document.body.style.overflow = nav.classList.contains("active")
-    ? "hidden"
-    : "";
-});
-
-// Close menu when clicking outside
-document.addEventListener("click", (e) => {
-  if (
-    nav.classList.contains("active") &&
-    !nav.contains(e.target) &&
-    !btnMobile.contains(e.target)
-  ) {
-    nav.classList.remove("active");
-    btnMobile.textContent = "☰";
-    document.body.style.overflow = "";
+    }
   }
-});
 
-// 7️⃣ --- TOUCH-FRIENDLY SEARCH CLEAR ---
-const clearSearchBtn = document.createElement("button");
-clearSearchBtn.innerHTML = "✕";
-clearSearchBtn.className = "clear-search";
-clearSearchBtn.setAttribute("aria-label", "Clear search");
-searchInput.parentNode.insertBefore(clearSearchBtn, searchInput.nextSibling);
-
-clearSearchBtn.addEventListener("click", () => {
-  searchInput.value = "";
-  filterMembers();
-  searchInput.focus();
-});
-
-searchInput.addEventListener("input", () => {
-  clearSearchBtn.style.display =
-    searchInput.value.length > 0 ? "block" : "none";
-});
-
-// 8️⃣ --- PREVENT ZOOM ON INPUT FOCUS (iOS) ---
-searchInput.addEventListener("touchstart", (e) => {
-  e.target.style.fontSize = "16px";
-});
-
-// 9️⃣ --- IMPROVED SCROLL FOR MOBILE ---
-let isScrolling;
-window.addEventListener(
-  "scroll",
-  () => {
-    // Clear our timeout throughout the scroll
-    window.clearTimeout(isScrolling);
-
-    // Set a timeout to run after scrolling ends
-    isScrolling = setTimeout(() => {
-      // Hide mobile menu if open during scroll
-      if (nav.classList.contains("active")) {
+  // 8️⃣ --- HANDLE WINDOW RESIZE ---
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      // Close mobile menu pada resize jika perlu
+      if (window.innerWidth > 900 && nav && nav.classList.contains("active")) {
         nav.classList.remove("active");
-        btnMobile.textContent = "☰";
-        document.body.style.overflow = "";
-      }
-    }, 66);
-  },
-  false
-);
-
-// 🔟 --- LOADING OPTIMIZATION FOR MOBILE ---
-// Lazy load images for better performance
-if ("IntersectionObserver" in window) {
-  const imageObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        const src = img.getAttribute("data-src");
-        if (src) {
-          img.src = src;
+        if (btnMobile) {
+          btnMobile.classList.remove("active");
+          btnMobile.textContent = "☰";
         }
-        imageObserver.unobserve(img);
+        document.body.classList.remove("menu-open");
       }
-    });
+    }, 250);
   });
-
-  document.querySelectorAll("img[data-src]").forEach((img) => {
-    imageObserver.observe(img);
-  });
-}
+});
