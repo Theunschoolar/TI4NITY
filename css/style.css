@@ -1334,7 +1334,7 @@ body {
   
   .controls {
     order: 0;
-    /* width: auto; */
+    width: 100%;
     margin-top: 0;
     gap: 10px;
   }
