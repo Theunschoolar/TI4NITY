@@ -908,3 +908,317 @@ body {
     height: 280px;
   }
 }
+/* ============================================================
+   RESPONSIVE IMPROVEMENTS FOR MOBILE
+   ============================================================ */
+
+/* Tablet (768px ke bawah) */
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  /* Header improvements */
+  .header-inner {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+
+  .brand {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .controls {
+    order: 3;
+    width: 100%;
+    margin-top: 15px;
+    justify-content: space-between;
+  }
+
+  .controls .search {
+    flex: 1;
+    max-width: calc(100% - 50px);
+  }
+
+  /* Hero section */
+  .hero {
+    padding: 20px 0;
+  }
+
+  .hero h2 {
+    font-size: 24px;
+    line-height: 1.3;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  /* Members grid */
+  .members-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .member-card.large-card .avatar {
+    height: 200px;
+  }
+
+  /* Media section */
+  .media-row {
+    padding: 15px;
+    margin: 0 -16px;
+    border-radius: 0;
+  }
+
+  .poster-and-gallery {
+    gap: 15px;
+  }
+
+  .media-item {
+    width: 200px;
+  }
+
+  .media-item img {
+    height: 280px;
+  }
+
+  /* Footer */
+  .footer-inner {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .socials .icons {
+    justify-content: flex-start;
+  }
+}
+
+/* Mobile kecil (480px ke bawah) */
+@media (max-width: 480px) {
+  /* Header lebih kompak */
+  .header-inner {
+    padding: 10px 12px;
+  }
+
+  .logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand h1 {
+    font-size: 16px;
+  }
+
+  .sub {
+    font-size: 11px;
+  }
+
+  /* Hero section */
+  .hero h2 {
+    font-size: 22px;
+  }
+
+  .hero-ctas .btn {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+
+  /* Members grid */
+  .members-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .member-card {
+    padding: 15px;
+  }
+
+  .member-card h4 {
+    font-size: 16px;
+  }
+
+  .member-card .role {
+    font-size: 12px;
+  }
+
+  .avatar {
+    height: 150px;
+  }
+
+  .member-card.large-card .avatar {
+    height: 180px;
+  }
+
+  /* Media section untuk mobile sangat kecil */
+  .media-item {
+    width: 160px;
+  }
+
+  .media-item img {
+    height: 220px;
+  }
+
+  /* About cards */
+  .info-card {
+    min-width: 100%;
+    padding: 15px;
+  }
+
+  .info-card h4 {
+    font-size: 16px;
+  }
+
+  .info-card p {
+    font-size: 14px;
+  }
+}
+
+/* Mobile sangat kecil (360px ke bawah) */
+@media (max-width: 360px) {
+  .members-grid {
+    grid-template-columns: 1fr;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .media-item {
+    width: 140px;
+  }
+
+  .media-item img {
+    height: 190px;
+  }
+
+  .search {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+}
+
+/* ============================================================
+   PERBAIKAN KHUSUS UNTUK TAMPILAN HORIZONTAL MOBILE
+   ============================================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .site-header {
+    position: relative;
+  }
+
+  .hero-inner {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .hero-media {
+    max-width: 40%;
+  }
+
+  .hero-content {
+    flex: 1;
+  }
+
+  .hero-ctas {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .hero-ctas .btn {
+    width: auto;
+    margin-right: 10px;
+  }
+}
+
+/* ============================================================
+   PERBAIKAN UNTUK TOUCH DEVICES
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+  /* Perbesar area klik untuk touch */
+  .nav a {
+    padding: 12px 16px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .member-card {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Hilangkan hover effects yang mengganggu di touch */
+  .member-card:hover {
+    transform: none;
+  }
+
+  .member-card:active {
+    transform: scale(0.98);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Scroll yang lebih smooth di iOS */
+  .media-row {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ============================================================
+   FIX UNTUK iOS SAFARI
+   ============================================================ */
+@supports (-webkit-touch-callout: none) {
+  .site-header {
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .modal-inner {
+    background: rgba(20, 22, 35, 0.98);
+  }
+
+  /* Fix untuk 100vh di iOS */
+  .hero {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* ============================================================
+   PERBAIKAN VISIBILITAS DI OUTDOOR/CAHAYA TERANG
+   ============================================================ */
+@media (prefers-color-scheme: light) {
+  .search::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .btn.ghost {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* ============================================================
+   LOADING STATE IMPROVEMENT
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

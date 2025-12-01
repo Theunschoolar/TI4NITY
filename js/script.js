@@ -214,7 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
     memberCount.textContent = members.length;
 
     // Reset class untuk membersGrid
-    membersGrid.classList.remove("few-results-1", "few-results-2", "few-results-3");
+    membersGrid.classList.remove(
+      "few-results-1",
+      "few-results-2",
+      "few-results-3"
+    );
 
     if (members.length === 0) {
       membersGrid.innerHTML = `
@@ -233,12 +237,12 @@ document.addEventListener("DOMContentLoaded", () => {
     members.forEach((member) => {
       const memberCard = document.createElement("article");
       memberCard.className = "member-card";
-      
+
       // Tambahkan class khusus untuk card dalam pencarian sedikit
       if (members.length <= 3) {
         memberCard.classList.add("large-card");
       }
-      
+
       memberCard.innerHTML = `
         <div class="avatar" style="background-image:url('${member.image}')"></div>
         <h4>${member.name}</h4>
@@ -283,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderMembers(membersData);
   document.getElementById("year").textContent = new Date().getFullYear();
-  
+
   // 1️⃣ --- ANIMASI FADE-UP ON SCROLL ---
   const fadeEls = document.querySelectorAll(
     ".member-card, .info-card, .hero-content, .hero-media, .section-head"
@@ -365,3 +369,94 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// 6️⃣ --- IMPROVED MOBILE MENU ---
+const btnMobile = document.getElementById("btn-mobile");
+const nav = document.querySelector(".nav");
+
+btnMobile.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  btnMobile.textContent = nav.classList.contains("active") ? "✕" : "☰";
+  // Prevent body scroll when menu is open
+  document.body.style.overflow = nav.classList.contains("active")
+    ? "hidden"
+    : "";
+});
+
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
+  if (
+    nav.classList.contains("active") &&
+    !nav.contains(e.target) &&
+    !btnMobile.contains(e.target)
+  ) {
+    nav.classList.remove("active");
+    btnMobile.textContent = "☰";
+    document.body.style.overflow = "";
+  }
+});
+
+// 7️⃣ --- TOUCH-FRIENDLY SEARCH CLEAR ---
+const clearSearchBtn = document.createElement("button");
+clearSearchBtn.innerHTML = "✕";
+clearSearchBtn.className = "clear-search";
+clearSearchBtn.setAttribute("aria-label", "Clear search");
+searchInput.parentNode.insertBefore(clearSearchBtn, searchInput.nextSibling);
+
+clearSearchBtn.addEventListener("click", () => {
+  searchInput.value = "";
+  filterMembers();
+  searchInput.focus();
+});
+
+searchInput.addEventListener("input", () => {
+  clearSearchBtn.style.display =
+    searchInput.value.length > 0 ? "block" : "none";
+});
+
+// 8️⃣ --- PREVENT ZOOM ON INPUT FOCUS (iOS) ---
+searchInput.addEventListener("touchstart", (e) => {
+  e.target.style.fontSize = "16px";
+});
+
+// 9️⃣ --- IMPROVED SCROLL FOR MOBILE ---
+let isScrolling;
+window.addEventListener(
+  "scroll",
+  () => {
+    // Clear our timeout throughout the scroll
+    window.clearTimeout(isScrolling);
+
+    // Set a timeout to run after scrolling ends
+    isScrolling = setTimeout(() => {
+      // Hide mobile menu if open during scroll
+      if (nav.classList.contains("active")) {
+        nav.classList.remove("active");
+        btnMobile.textContent = "☰";
+        document.body.style.overflow = "";
+      }
+    }, 66);
+  },
+  false
+);
+
+// 🔟 --- LOADING OPTIMIZATION FOR MOBILE ---
+// Lazy load images for better performance
+if ("IntersectionObserver" in window) {
+  const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const src = img.getAttribute("data-src");
+        if (src) {
+          img.src = src;
+        }
+        imageObserver.unobserve(img);
+      }
+    });
+  });
+
+  document.querySelectorAll("img[data-src]").forEach((img) => {
+    imageObserver.observe(img);
+  });
+}
