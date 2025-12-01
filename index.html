@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TI4NITY 25</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Meta -->
+  <meta name="description" content="Website Rombel 4 Teknik Informatika UNNES - profil, anggota, pengumuman, materi, dan acara.">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="assets/logo(1).jpeg" alt="logo" class="logo">
+        <div>
+          <h1>Rombel 4</h1>
+          <p class="sub">Teknik Informatika 2025 • UNNES</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#members">Anggota</a></li>
+          <li><a href="#materials">Materi</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <div class="controls">
+        <input id="search" class="search" placeholder="Cari anggota atau materi..." />
+        <button id="btn-mobile" class="hamburger" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-inner container">
+        <div class="hero-content">
+          <h2>Teknik Informatika • Rombel 4 2025</h2>
+          <p class="lead">Tempat belajar, proyek bersama, dan berbagi ilmu di Teknik Informatika — UNNES.</p>
+
+          <div class="hero-ctas">
+            <a href="#members" class="btn primary">Lihat Anggota</a>
+            <a href="#materials" class="btn ghost">Materi & Jadwal</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img src="assets/Foto-Rombel.jpeg" alt="hero" class="media-img">
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTOR / MEMBERS -->
+    <section id="members" class="members container">
+      <div class="section-head">
+        <h3>Daftar Anggota</h3>
+        <p class="muted">Rombel 4 • Teknik Informatika</p>
+      </div>
+
+      <div class="members-grid" id="membersGrid">
+        <!-- Member cards injected by JS / sample fallback -->
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Azzel Fausta(1).jpeg')"></div>
+          <h4>ELL</h4>
+          <p class="role">Azzel Fausta Hamda Yuval</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Fadhil Syarief Pratomo.jpeg')"></div>
+          <h4>Fadhil</h4>
+          <p class="role">Fadhil Syarief Pratomo</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Dani Ramadhan.jpeg')"></div>
+          <h4>Dani</h4>
+          <p class="role">Dani Ramadhan</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Renhard Padolski Herlambang.jpeg')"></div>
+          <h4>Padolski</h4>
+          <p class="role">Renhard Padolski Herlambang</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Aurellia Sangganna.jpeg')"></div>
+          <h4>Aurel</h4>
+          <p class="role">Aurellia Sangganna</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Aulia Vania Shanty.jpg')"></div>
+          <h4>Vani</h4>
+          <p class="role">Aulia Vania Shanty</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Muhammad Ibrahim Zurhri.webp')"></div>
+          <h4>Zuhri</h4>
+          <p class="role">Muhammad Ibrahim Zuhri</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Muhammad Alfa Khakim.jpeg')"></div>
+          <h4>Alfa</h4>
+          <p class="role">Muhammad Alfa Khakim</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Muhammad Nouval Ar-rizky.jpeg')"></div>
+          <h4>Nouval</h4>
+          <p class="role">Muhammad Nouval Ar-Rizky</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Farras Syuja.jpg')"></div>
+          <h4>Syuja</h4>
+          <p class="role">Farras Syuja</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Fahlevi Fahad Aqmaddina.jpeg')"></div>
+          <h4>Levi</h4>
+          <p class="role">Fahlevi Fahad Aqmaddina</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Dicky Maulana Aziz.jpeg')"></div>
+          <h4>Dicky</h4>
+          <p class="role">Dicky Maulana Aziz</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Harmelia Meivira.jpeg')"></div>
+          <h4>Vira</h4>
+          <p class="role">Harmelia Meivira</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Deandra Arta Wiguna.jpeg')"></div>
+          <h4>Dean</h4>
+          <p class="role">Deandra Arta Wiguna</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Indah Aryanti Kartika Santoso.jpeg')"></div>
+          <h4>Indah</h4>
+          <p class="role">Indah Aryanti Kartika Santoso</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Muhammad Fatih Ali Zam-Zami.jpeg')"></div>
+          <h4>Fatih</h4>
+          <p class="role">Muhammad Fatih Ali Zam-Zami</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Muhammad Ruiz Ruzil.jfif')"></div>
+          <h4>Ruiz</h4>
+          <p class="role">Muhammad Ruiz Ruzil</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Rizal Fajri Arrasyid.jpeg')"></div>
+          <h4>Rizal</h4>
+          <p class="role">Rizal Fajri Arrasyid</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Izudien Al-Qasam.jpeg')"></div>
+          <h4>Qosam</h4>
+          <p class="role">Izzudien Al-Qosam</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Anjaly Salima Nafia.jpeg')"></div>
+          <h4>Lily</h4>
+          <p class="role">Anjaly Sallima Nafia</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Muhammad Rafif.jpeg')"></div>
+          <h4>Rafif</h4>
+          <p class="role">Muhammad Rafif Sakha Efendi</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Sufi Sundari(1).jpeg')"></div>
+          <h4>Sufi</h4>
+          <p class="role">Sufi Sundari</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Haikal Rakha.jpeg')"></div>
+          <h4>Haikal</h4>
+          <p class="role">Haikal Rakha Pratama</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Muhammad Nahdi Hidayat.jpeg')"></div>
+          <h4>Nahdi</h4>
+          <p class="role">Muhammad Nahdi Hidayat</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Rizky Ghaly Saputra.jpeg')"></div>
+          <h4>Rizky</h4>
+          <p class="role">Rizky Ghaly Saputra</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Rizaldi Henri.jpeg')"></div>
+          <h4>Rizaldi</h4>
+          <p class="role">Rizaldi Henry Prakoso</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Fairuz Alfian.png')"></div>
+          <h4>Alfian</h4>
+          <p class="role">Fairuz Alfian Priasahashika</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Zulfia Tirta Irawan.jpg')"></div>
+          <h4>Tirta</h4>
+          <p class="role">Zulfia Tirta Irawan</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Charly Gerald Simanjuntak.jpeg')"></div>
+          <h4>Gerald</h4>
+          <p class="role">Charly Gerald Simanjuntak</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Haikal Akhsan.jpeg')"></div>
+          <h4>Haikal</h4>
+          <p class="role">Haikal Akhsan Darmawan</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Reyhan Aria Adyatama.jpeg')"></div>
+          <h4>Sehan</h4>
+          <p class="role">Reyhan Arya Adyatama</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Muhammad Ammar Farras Fauzan.jpeg')"></div>
+          <h4>Ozan</h4>
+          <p class="role">Muhammad Ammar Farras Fauzan</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Raynard Alvanta.jpeg')"></div>
+          <h4>Raynard</h4>
+          <p class="role">Raynard Kayana Alvanta Pramuditho</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Ilma Nazala.jpeg')"></div>
+          <h4>Ilma</h4>
+          <p class="role">Ilma Nazala</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Farritz.jpeg')"></div>
+          <h4>Farritz</h4>
+          <p class="role">Farritz</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Selly Anggun Ramadhani.jpeg')"></div>
+          <h4>Selly</h4>
+          <p class="role">Selly Anggun Ramadhani</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Afifah Hasna Nafisa.jpg')"></div>
+          <h4>Afifah</h4>
+          <p class="role">Afifah Hasna Nafisa</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Fairuz Mumtaz Mutmainah.jfif')"></div>
+          <h4>Fairuz</h4>
+          <p class="role">Fairuz Mumtaz Mutmainah</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Fathiyya Zahrotussyifa.jpeg')"></div>
+          <h4>Uzzi</h4>
+          <p class="role">Fathiyya Zahrotussyifa</p>
+        </article>
+
+        <article class="member-card">
+          <div class="avatar" style="background-image:url('assets/Hema Septia Bemanda.jpeg')"></div>
+          <h4>Hema</h4>
+          <p class="role">Hema Septia Bemanda</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SELECTED FILMS / MEDIA -->
+    <section id="materials" class="selected container">
+      <div class="section-head">
+        <h3>Selected Media & Project</h3>
+        <p class="muted">Presentasi, rekaman, dan poster kegiatan rombel</p>
+      </div>
+
+<div class="media-row">
+  <div class="poster-and-gallery">
+    <!-- Poster -->
+    <div class="media-item">
+      <img src="assets/poster1.jpg" alt="Poster">
+      <p class="media-caption">Poster 1</p>
+    </div>
+
+    <!-- Foto 1 -->
+    <div class="media-item">
+      <img src="assets/Dicky Maulana Aziz.jpeg" alt="Foto 1">
+      <p class="media-caption">Dicky 1</p>
+    </div>
+
+    <!-- Foto 2 -->
+    <div class="media-item">
+      <img src="assets/Dicky Maulana Aziz.jpeg" alt="Foto 2">
+      <p class="media-caption">Dicky 2</p>
+    </div>
+
+    <!-- Foto 3 -->
+    <div class="media-item">
+      <img src="assets/Dicky Maulana Aziz.jpeg" alt="Foto 3">
+      <p class="media-caption">Dicky 3</p>
+    </div>
+
+    <!-- Foto 4 -->
+    <div class="media-item">
+      <img src="assets/Dicky Maulana Aziz.jpeg" alt="Foto 4">
+      <p class="media-caption">Dicky 4</p>
+    </div>
+  </div>
+</div>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="about container">
+      <h3>Apa yang kita lakukan?</h3>
+      <p>Lewat kolaborasi dan rasa kekeluargaan di Rombel 4, Kita percaya kalau belajar itu nggak harus kaku atau membosankan, semua hal bisa jadi lebih ringan dan menyenangkan. mulai dari ngerjain tugas bareng, sharing pengalaman magang, sampai brainstorming ide buat proyek keren selanjutnya. Bersama, kita bukan cuma ngejar nilai, tapi juga nyiapin diri buat masa depan di dunia teknologi yang penuh peluang.</p>
+      <div class="cards">
+        <div class="info-card">
+          <h4>SNIK</h4>
+          <p>AI Driven Business Transformation: From Blockchain to Extended Reality</p>
+        </div>
+        <div class="info-card">
+          <h4>Project</h4>
+          <p>Pembuatan Website, Aplikasi ataupun Laporan Praktikum.</p>
+        </div>
+        <div class="info-card">
+          <h4>Acara</h4>
+          <p>Install IOS, Coding, Mabar, Kumpul-Kumpul dan Sharing Info info seputar teknologi.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact" class="site-footer">
+      <div class="container footer-inner">
+        <div>
+          <h4>Rombel 4 • Teknik Informatika UNNES</h4>
+          <p>Komting Rombel: <strong>Farras Syuja</strong></p>
+          <p>Email: <a href="mailto:rombel4ti25@gmail.com">rombel4ti25@gmail.com</a></p>
+        </div>
+        <div class="socials">
+          <p>Follow:</p>
+          <div class="icons">
+            <a href="https://www.instagram.com/ti4nity_?igsh=MXE4YmFibzA3aHpiOA=="><img src="assets/Instagram.jpeg" alt="logo" class="logo"></a>
+            <a href="https://open.spotify.com/playlist/5pE58m0dhAJaG9sZQWwgHi?si=BOaH8pIhTuSWbhwhijY7mQ"><img src="assets/Spotify.jpeg" alt="logo" class="logo"></a></a>
+            <a href="#">Line</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">© <span id="year"></span> Rombel 4 - TI UNNES 2025</div>
+    </footer>
+  </main>
+
+  <!-- Modal Video (simple) -->
+  <div id="videoModal" class="modal">       
+    <div class="modal-inner">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="video-wrap">
+        <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
+</body>
+</html>
